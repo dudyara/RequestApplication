@@ -1,7 +1,11 @@
-﻿namespace RequestApplication.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RequestApplication.Entities
 {
     public abstract class BaseEntity
     {
-        public int Id { get; set; }
+        [Key]
+        [Required]
+        public long Id { get; set; }
     }
 }
