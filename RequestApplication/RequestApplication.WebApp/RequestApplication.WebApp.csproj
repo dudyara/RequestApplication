@@ -17,8 +17,4 @@
     <ProjectReference Include="..\RequestApplication.Services\RequestApplication.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Application\" />
-  </ItemGroup>
-
 </Project>

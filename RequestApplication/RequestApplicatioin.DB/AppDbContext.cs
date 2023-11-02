@@ -1,12 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using RequestApplication.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RequestApplicatioin.DB
 {
@@ -17,21 +10,21 @@ namespace RequestApplicatioin.DB
 
         public AppDbContext()
         {
-            //Database.EnsureDeleted();
             Database.EnsureCreated();
-        } 
+        }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
         {
-            optionsBuilder.UseSqlServer(@"Server=MSI\SQLEXPRESS;Database=master;Trusted_Connection=True;Integrated Security=True;MultipleActiveResultSets=True;TrustServerCertificate=True");
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Application>()
-                    .HasMany(a => a.Requests)
-                    .WithOne(r => r.Application)
-                    .HasForeignKey(r => r.ApplicationId);
+                .HasMany(a => a.Requests)
+                .WithOne(r => r.Application)
+                .HasForeignKey(r => r.ApplicationId);
         }
     }
 }
