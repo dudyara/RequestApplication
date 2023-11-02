@@ -12,18 +12,12 @@ namespace RequestApplication.WebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<List<ApplicationDto>>> Get(
+        public async Task<IActionResult> Index(
             [FromServices] ApplicationService service)
         {
-            var result = await service.GetAsync();
+            ViewBag.Applications = await service.GetAsync();
             _logger.LogInformation($"Got applications {DateTime.UtcNow.ToLongTimeString()}");
-            return result;
+            return View();
         }
     }
 }

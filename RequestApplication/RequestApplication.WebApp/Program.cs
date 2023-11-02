@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using RequestApplicatioin.DB;
 using RequestApplication.Entities;
 using RequestApplication.Services.Dto;
@@ -14,7 +15,8 @@ namespace RequestApplication.WebApp
 
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddTransient<AppDbContext>();
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddTransient<IDbRepository<Application>, DbRepository<Application>>();
             builder.Services.AddTransient<IDbRepository<Request>, DbRepository<Request>>();
@@ -44,7 +46,11 @@ namespace RequestApplication.WebApp
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Request}/{action=Index}");
+                pattern: "{controller=Home}/{action=Index}");
+
+            var serviceProvider = builder.Services.BuildServiceProvider();
+            var service = serviceProvider.GetService<IDbRepository<Application>>();
+            Initializer.InitializeAsync(service);
 
             app.Run();
         }
