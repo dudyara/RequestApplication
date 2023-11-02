@@ -1,0 +1,35 @@
+﻿@model RequestApplication.Services.Dto.RequestDto
+
+<div class="text-center">
+    <h1 class="display-4">Создать заявку</h1>
+</div>
+<center>
+    @using (Html.BeginForm("Add", "Request", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.Id)
+        <table>
+            <tr>
+                <td><b>Наименование</b></td>
+                <td>@Html.TextBoxFor(model => model.Name, new {style = "width: 250px;" , @required  = "required"})<br /></td>
+            </tr>
+            <tr>
+                <td><b>Приложение</b></td>
+                <td>@Html.DropDownList("ApplicationId", ViewBag.Apps as SelectList, new { style = "width: 250px;", @required  = "required" })<br /></td>
+            </tr>
+            <tr>
+                <td><b>Email</b></td>
+                <td>@Html.TextBoxFor(m => m.Email, new { @type = "email", style = "width: 250px;", @required  = "required" })<br /></td>
+            </tr>
+            <tr>
+                <td><b>Описание</b></td>
+                <td>@Html.TextAreaFor(model => model.Description, 5, 1, new { style = "width: 250px;", @required  = "required" })<br /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <br />
+                    <center><input type="submit" value="Сохранить" /></center>
+                </td>
+            </tr>
+        </table>
+    }
+</center>

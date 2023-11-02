@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Заявки";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Заявки</h1>
+</div>
+    <table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Название</th>
+            <th>Приложение</th>
+            <th>Дата окончания разработки</th>
+            <th>Описание</th>
+            <th>Email</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in ViewBag.Requests)
+        {
+            <tr>
+                <td>@request.Id</td>
+                <td>@request.Name</td>
+                <td>@request.ApplicationName</td>
+                @{
+                    if (@request.EndDate != null)
+                    {
+                        <td>@request.EndDate.ToString("yyyy.MM.dd")</td>
+                    } 
+                    else  
+                    { 
+                        <td></td> 
+                    }
+                }                 
+                <td>@request.Description</td>
+                <td>@request.Email</td>
+                <td width="85">
+                    @{
+                        <a href="~/Request/Edit/@request.Id"><img src="https://cdn-icons-png.flaticon.com/512/84/84380.png" width="25" height="25"></a>
+                        <a href="~/Request/Delete/@request.Id"><img src="https://cdn-icons-png.flaticon.com/512/3096/3096673.png" width="25" height="25" /></a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<center><a href="~/Request/Add" class="button7">Создать заявку</a></center> 

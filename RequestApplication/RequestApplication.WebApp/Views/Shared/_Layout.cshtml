@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/RequestApplication.WebApp.styles.css" asp-append-version="true" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <style>
+        .table {
+            width: 100%;
+            border: none;
+            margin-bottom: 20px;
+            border-collapse: separate;
+        }
+
+        table.dataTable thead th, table.dataTable thead td {
+            padding: 10px 18px;
+            border-bottom: 0px solid #999; 
+        }
+
+        table.dataTable.no-footer {
+            border-bottom: 0px solid #111;
+        }
+
+        .table thead th {
+            font-weight: bold;
+            text-align: left;
+            border: none;
+            padding: 10px 15px;
+            background: #EDEDED;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+        }
+
+        .table tr th:first-child, .table tr td:first-child {
+            border-left: 1px solid #ddd;
+        }
+
+        .table tr th:last-child, .table tr td:last-child {
+            border-right: 1px solid #ddd;
+        }
+
+        .table thead tr th:first-child {
+            border-radius: 20px 0 0 0;
+        }
+
+        .table thead tr th:last-child {
+            border-radius: 0 20px 0 0;
+        }
+
+        .table tbody td {
+            text-align: left;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            vertical-align: top;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background: #F8F8F8;
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table tbody tr:last-child td:first-child {
+            border-radius: 0 0 0 20px;
+        }
+
+        .table tbody tr:last-child td:last-child {
+            border-radius: 0 0 20px 0;
+        }
+
+        a.button7 {
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            padding: .8em 1em calc(.8em + 3px);
+            border-radius: 3px;
+            background: rgb(64,199,129);
+            box-shadow: 0 -3px rgb(53,167,110) inset;
+            transition: 0.2s;
+        }
+
+        a.button7:hover {
+            background: rgb(53, 167, 110);
+        }
+
+        a.button7:active {
+            background: rgb(33,147,90);
+            box-shadow: 0 3px rgb(33,147,90) inset;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RequestApplication</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="Index">Заявки</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Application" asp-action="Index">Приложения</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#ApplicationId").select2();
+        });
+    </script>
+    <script>
+    $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+</body>
+</html>
